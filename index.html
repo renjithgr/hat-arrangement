@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/fabric"></script>
+</head>
+
+<body>
+    <canvas id="canvas" width="1024" height="576"></canvas>
+</body>
+
+
+<style>
+    canvas {
+        border: 1px solid black;
+    }
+</style>
+<script>
+    const canvas = new fabric.Canvas("canvas");
+    fabric.Object.prototype.set({
+        transparentCorners: false,
+        borderColor: "#ff00ff",
+        cornerColor: "#ff0000",
+    });
+    fabric.Image.fromURL(
+        "blank-wall.jpg",
+        (oImg) => {
+            oImg.scaleToWidth(1024, true);
+            canvas.add(oImg);
+        },
+        {
+            selectable: false,
+            left: 0,
+            top: 0,
+            lockMovementX: true,
+            lockMovementY: true,
+        },
+    );
+    [
+        {fileName: "hat1.png", left: 665, top: 307},
+        {fileName: "hat2.png", left: 547, top: 259},
+        {fileName: "hat3.png", left: 608, top: 205},
+        {fileName: "hat4.png", left: 492, top: 158},
+        {fileName: "hat5.png", left: 426, top: 202},
+        {fileName: "hat6.png", left: 380, top: 110},
+        {fileName: "hat7.png", left: 325, top: 165},
+        {fileName: "hat8.png", left: 264, top: 60},
+        {fileName: "hat9.png", left: 231, top: 110},
+        {fileName: "hat10.png", left: 172, top: 28},
+    ].forEach((item, left, right) => {
+        fabric.Image.fromURL(
+            item.fileName,
+            (oImg) => {
+                oImg.scale(0.5);
+                canvas.add(oImg);
+            },
+            {
+                lockScalingX: true,
+                lockScalingY: true,
+
+                left: item.left,
+                top: item.top,
+            },
+        );
+    });
+
+        // var moveHandler = function (evt) {
+        //     var movingObject = evt.target;
+        //     console.log(movingObject.get("left"), movingObject.get("top"));
+        // };
+        // canvas.on("object:moving", moveHandler);
+</script>
+
+</html>
